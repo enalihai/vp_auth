@@ -21,7 +21,7 @@ RSpec.describe 'Registration Page', type: :feature do
 
       click_on 'Register User'
    
-      expect(page).to have_content("Welcome, #{name}")
+      expect(page).to have_content("#{name}")
     end
 
     it 'will return an error if name is missing' do

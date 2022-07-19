@@ -25,7 +25,7 @@ RSpec.describe 'User Index Page', type: :feature do
       expect(page).to have_content("#{oakley.name}'s Dashboard")
     end
 
-    xit "cannot log in with bad credentials" do
+    it "cannot log in with bad credentials" do
       user = User.create(name: 'Oakley', email: "funbucket13", password: "test", password_confirmation: "test")
 
       visit login_path

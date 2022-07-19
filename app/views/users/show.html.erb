@@ -1,7 +1,9 @@
 <div id="whitespace">
   <center>
     <h1> Viewing Party Lite </h1>
-   <%= "Welcome, #{@user.name}"%>
+   <% flash.each do |type, msg| %>
+      <div> <%= msg %> </div>
+    <% end %>
     <h2>
       <%= "#{@user.name}'s Dashboard" %> <br>
     </h2>

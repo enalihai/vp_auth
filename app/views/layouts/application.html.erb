@@ -2,10 +2,6 @@
 <html>
   <head>
     <title>ViewingPartyLite</title>
-    <% flash.each do |type, msg| %>
-      <div> <%= msg %> </div>
-    <% end %>
-    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -14,6 +10,9 @@
   </head>
 
   <body>
+   <% flash.each do |type, msg| %>
+      <div> <%= msg %> </div>
+    <% end %>
     <%= link_to "Home", root_path %> 
     <%= yield %>
   </body>
