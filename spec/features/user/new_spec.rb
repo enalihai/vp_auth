@@ -29,7 +29,7 @@ RSpec.describe 'Registration Page', type: :feature do
 
       click_link "Register as a User"
 
-      expect(page).to_not have_content('A required field was missing or email is already in use')
+      expect(page).to_not have_content("Sorry, your credentials are bad.")
 
       fill_in(:user_name, with: "")
       fill_in(:user_email, with: 'not-frankenstein@gmail.com')
@@ -38,7 +38,7 @@ RSpec.describe 'Registration Page', type: :feature do
       click_on('Register User')
 
       expect(current_path).to eq('/register')
-      expect(page).to have_content('A required field was missing or email is already in use')
+      expect(page).to have_content("Sorry, your credentials are bad.")
     end
 
     it 'will return an error if email is missing' do
@@ -46,7 +46,7 @@ RSpec.describe 'Registration Page', type: :feature do
 
       click_link "Register as a User"
 
-      expect(page).to_not have_content('A required field was missing or email is already in use')
+      expect(page).to_not have_content("Sorry, your credentials are bad.")
 
       fill_in(:user_name, with: "Frankenstein's Monster")
       fill_in(:user_email, with: '')
@@ -55,7 +55,7 @@ RSpec.describe 'Registration Page', type: :feature do
       click_on('Register User')
 
       expect(current_path).to eq('/register')
-      expect(page).to have_content('A required field was missing or email is already in use')
+      expect(page).to have_content("Sorry, your credentials are bad.")
     end
 
     it 'will return an error if email is not unique' do
@@ -64,7 +64,7 @@ RSpec.describe 'Registration Page', type: :feature do
 
       click_link "Register as a User"
 
-      expect(page).to_not have_content('A required field was missing or email is already in use')
+      expect(page).to_not have_content("Sorry, your credentials are bad.")
 
       fill_in(:user_name, with: "Frankenstein's Monster")
       fill_in(:user_email, with: 'not-frankenstein@gmail.com')
@@ -73,7 +73,7 @@ RSpec.describe 'Registration Page', type: :feature do
       click_on('Register User')
 
       expect(current_path).to eq('/register')
-      expect(page).to have_content('A required field was missing or email is already in use')
+      expect(page).to have_content("Sorry, your credentials are bad.")
     end
   end
 end

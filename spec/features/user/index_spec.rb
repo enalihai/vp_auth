@@ -32,8 +32,7 @@ RSpec.describe 'User Index Page', type: :feature do
 
       fill_in :email, with: 'funbucket13'
       fill_in :password, with: "incorrect password"
-
-      click_button "Log In"
+      click_on "Log In"
 
       expect(current_path).to eq(login_path)
       expect(page).to have_content("Sorry, your credentials are bad.")

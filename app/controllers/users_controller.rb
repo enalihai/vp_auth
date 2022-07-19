@@ -23,7 +23,8 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome, #{new_user.email}!"
       redirect_to "/users/#{new_user.id}"
     else
-      redirect_to register_path, notice: 'A required field was missing or email is already in use'
+      flash[:error] = "Sorry, your credentials are bad."
+      redirect_to register_path
     end
   end
 
@@ -44,7 +45,10 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(email: params[:email])
-    if user.authenticate(params[:password])
+    if user == nil
+      flash[:error] = "Sorry, your credentials are bad."
+      redirect_to login_path
+    elsif user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Welcome, #{user.email}!"
       redirect_to "/users/#{user.id}"
