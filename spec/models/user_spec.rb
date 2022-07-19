@@ -15,15 +15,42 @@ RSpec.describe User, type: :model do
 
   describe 'password authorization' do
     it 'tests the new user to check password_digest was created' do
-      user = User.create(name: 'Auth Tests', 
-                  email: 'auth@gmail.com', 
-                  password: 'password', 
-                  password_confirmation: 'password')
+      user = User.create(name: 'Auth Tests', email: 'auth@gmail.com', password: 'password', password_confirmation: 'password')
       expect(user).to be_a(User)
       expect(user.name).to eq('Auth Tests')
       expect(user.email).to eq('auth@gmail.com')
-      expect(user).has_key?(:password_digest)
+      expect(user.password_digest).present?
       expect(user.password_digest).to_not eq('password')
+      expect(user.save).to be(true)
+    end
+
+    it 'checks sad paths of our attributes' do
+      user = User.create(name: '', 
+                  email: 'auth@gmail.com', 
+                  password: 'password', 
+                  password_confirmation: 'password')
+      expect(user.save).to be(false)
+    
+      user = User.create(name: 'Auth Tests', 
+                  email: '', 
+                  password: 'password', 
+                  password_confirmation: 'password')
+
+      expect(user.save).to be(false)
+
+      user = User.create(name: 'Auth Tests', 
+                  email: 'auth@gmail.com', 
+                  password: '', 
+                  password_confirmation: 'password')
+
+      expect(user.save).to be(false)
+
+      user = User.create(name: 'Auth Tests', 
+                  email: 'auth@gmail.com', 
+                  password: 'password', 
+                  password_confirmation: '')
+
+      expect(user.save).to be(false)
     end
   end
 end

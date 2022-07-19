@@ -53,13 +53,15 @@ RSpec.describe 'Registration Page', type: :feature do
     end
 
     it 'will return an error if email is not unique' do
-      User.create(name: 'Adam Frankenstein', email: 'not-frankenstein@gmail.com')
+      User.create(name: 'Adam Frankenstein', email: 'not-frankenstein@gmail.com', password: 'password', password_confirmation: 'password')
       visit '/register'
 
       expect(page).to_not have_content('A required field was missing or email is already in use')
 
       fill_in(:name, with: "Frankenstein's Monster")
       fill_in(:email, with: 'not-frankenstein@gmail.com')
+      fill_in(:password, with: 'password')
+      fill_in(:password_confirmation, with: 'password')
       click_button('Create New User')
 
       expect(current_path).to eq('/register')
