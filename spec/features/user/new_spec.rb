@@ -13,12 +13,13 @@ RSpec.describe 'Registration Page', type: :feature do
 
       fill_in(:name, with: "Frankenstein's Monster")
       fill_in(:email, with: 'not-frankenstein@gmail.com')
+      fill_in(:password, with: 'password')
+      fill_in(:password_confirmation, with: 'password')
       click_button('Create New User')
 
       new_user = User.where(name: "Frankenstein's Monster").first
 
       expect(current_path).to eq("/users/#{new_user.id}")
-      # expect(page).to have_content("Frankenstein's Monster's Dashboard")
     end
 
     it 'will return an error if name is missing' do
@@ -26,8 +27,10 @@ RSpec.describe 'Registration Page', type: :feature do
 
       expect(page).to_not have_content('A required field was missing or email is already in use')
 
-      # fill_in(:name, with: "")
+      fill_in(:name, with: "")
       fill_in(:email, with: 'not-frankenstein@gmail.com')
+      fill_in(:password, with: 'password')
+      fill_in(:password_confirmation, with: 'password')
       click_button('Create New User')
 
       expect(current_path).to eq('/register')
@@ -40,7 +43,9 @@ RSpec.describe 'Registration Page', type: :feature do
       expect(page).to_not have_content('A required field was missing or email is already in use')
 
       fill_in(:name, with: "Frankenstein's Monster")
-      # fill_in(:email, with: "")
+      fill_in(:email, with: '')
+      fill_in(:password, with: 'password')
+      fill_in(:password_confirmation, with: 'password')
       click_button('Create New User')
 
       expect(current_path).to eq('/register')
