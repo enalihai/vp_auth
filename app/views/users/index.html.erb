@@ -1,15 +1,13 @@
 <center>
   <h1> Viewing Party Lite </h1>
-
-  <div id="button">
-    <%= button_to "Create a New User", "/register", method: :get %>
-    <br>
-  </div>
-
+ <% flash.each do |type, msg| %>
+      <div> <%= msg %> </div>
+    <% end %>
   <div>
     Existing Users: <br>
       <% @users.each do |user| %>
         <%= link_to "#{user.email}'s Dashboard", "/users/#{user.id}" %> </br>
       <% end %>
   </div>
+  
 </center>

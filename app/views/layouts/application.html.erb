@@ -9,6 +9,9 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
+   <% flash.each do |type, msg| %>
+      <div> <%= msg %> </div>
+    <% end %>
   <body>
     <%= link_to "Home", root_path %> 
     <%= yield %>
