@@ -9,7 +9,7 @@ RSpec.describe 'Registration Page', type: :feature do
 
       click_on "Register as a User"
 
-      expect(current_path).to eq('/users/new')
+      expect(current_path).to eq('/register')
 
       email = "HazelTheDog@gmail.com"
       name = "Hazel the Dog"
