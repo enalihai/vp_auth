@@ -2,6 +2,10 @@
 <html>
   <head>
     <title>ViewingPartyLite</title>
+    <% flash.each do |type, msg| %>
+      <div> <%= msg %> </div>
+    <% end %>
+    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 

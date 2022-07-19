@@ -25,7 +25,6 @@ RSpec.describe 'The User Show Page', type: :feature do
 
     it 'has a section that lists viewing parties' do
       user = User.create!(name: 'Rand', email: 'randalthor@gmail.com', password: 'password', password_confirmation: 'password')
-      # will need to add more to this test, select a movie, create a view party etc.
 
       visit "/users/#{user.id}"
 

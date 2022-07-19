@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:password) }
   end
 
-  describe 'password authorization' do
+  describe 'attributes' do
     it 'tests the new user to check password_digest was created' do
       user = User.create(name: 'Auth Tests', email: 'auth@gmail.com', password: 'password', password_confirmation: 'password')
       expect(user).to be_a(User)
@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
       expect(user.save).to be(true)
     end
 
-    it 'checks sad paths of our attributes' do
+    it 'doesnt save if invalid attributes' do
       user = User.create(name: '', 
                   email: 'auth@gmail.com', 
                   password: 'password', 
