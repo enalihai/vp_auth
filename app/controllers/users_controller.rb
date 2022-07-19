@@ -20,8 +20,9 @@ class UsersController < ApplicationController
   def create
     new_user = User.new(user_params) 
     if new_user.save
+      session[:user_id] = new_user.id
       flash[:success] = "Welcome, #{new_user.email}!"
-      redirect_to "/users/#{new_user.id}"
+      redirect_to "/users/#{new_user.id}" ## maybe direct to login path here
     else
       flash[:error] = "Sorry, your credentials are bad."
       redirect_to register_path
@@ -31,21 +32,10 @@ class UsersController < ApplicationController
   def login_form
     render :partial => 'login_form.html.erb'
   end
-
-  def login_user
-    user = User.find_by(email: params[:email])
-    if user.save
-      redirect_to "/user/#{user.id}"
-      flash[:success] = "Welcome, #{user[:email]}!"
-    else 
-      redirect_to login_path
-      flash[:error] = "Invalid Credentials"
-    end
-  end
-
+  
   def login
     user = User.find_by(email: params[:email])
-    if user == nil
+    if user.nil?
       flash[:error] = "Sorry, your credentials are bad."
       redirect_to login_path
     elsif user.authenticate(params[:password])

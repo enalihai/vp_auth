@@ -11,8 +11,10 @@ RSpec.describe 'User Index Page', type: :feature do
     end
 
     it 'has a link to login and users are taken to their dashboard' do
-      oakley = User.create!(name: 'Oakley', email: 'some_good_dog@gmail.com', password: 'password', password_confirmation: 'password')
+      oakley = User.create(name: 'Oakley', email: 'some_good_dog@gmail.com', password: 'password', password_confirmation: 'password')
+
       visit root_path
+
       click_link("Log In")
      
       expect(current_path).to eq(login_path)
@@ -26,16 +28,28 @@ RSpec.describe 'User Index Page', type: :feature do
     end
 
     it "cannot log in with bad credentials" do
-      user = User.create(name: 'Oakley', email: "funbucket13", password: "test", password_confirmation: "test")
+      user = User.create(name: 'Oakley', email: "some_good_dog@woof.com", password: "correct_password", password_confirmation: "correct_password")
 
       visit login_path
 
-      fill_in :email, with: 'funbucket13'
+      fill_in :email, with: 'some_good_dog@woof.com'
       fill_in :password, with: "incorrect password"
       click_on "Log In"
 
       expect(current_path).to eq(login_path)
       expect(page).to have_content("Sorry, your credentials are bad.")
+
+      fill_in :email, with: 'some_bad_dog@woof.com'
+      fill_in :password, with: 'correct_password'
+      click_on "Log In"
+
+      expect(current_path).to eq(login_path)
+      
+      fill_in :email, with: ''
+      fill_in :password, with: ''
+      click_on "Log In"
+
+      expect(current_path).to eq(login_path)
     end
 
     it 'has a list of existing users as links to the user dashboard' do
