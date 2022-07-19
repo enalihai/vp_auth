@@ -18,14 +18,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    new_user = User.new(user_params)
-    new_user.save
-    new_user[:email] = new_user[:email].downcase
-    flash[:success] = "Welcome, #{new_user.email}!"
-    redirect_to "/users/#{new_user.id}"
-    # else
-    #   redirect_to root_path, notice: 'A required field was missing or email is already in use'
-    # end
+    new_user = User.new(user_params) 
+    if new_user.save
+      redirect_to "/users/#{new_user.id}"
+      flash[:success] = "Welcome, #{new_user.email}!"
+    else
+      redirect_to register_path, notice: 'A required field was missing or email is already in use'
+    end
   end
 
   def login_form
@@ -35,8 +34,8 @@ class UsersController < ApplicationController
   def login_user
     user = User.find_by(email: params[:email])
     if user.save
-      flash[:success] = "Welcome, #{user[:email]}!"
       redirect_to "/user/#{user.id}"
+      flash[:success] = "Welcome, #{user[:email]}!"
     else 
       redirect_to login_path
       flash[:error] = "Invalid Credentials"
