@@ -21,6 +21,7 @@ class UsersController < ApplicationController
     new_user = User.new(user_params) 
     if new_user.save
       session[:user_id] = new_user.id
+      cookies[:authorized] = {value: 1, expires: 1.hour}
       flash[:success] = "Welcome, #{new_user.email}!"
       redirect_to "/users/#{new_user.id}" ## maybe direct to login path here
     else
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
   def login_form
     render :partial => 'login_form.html.erb'
   end
-  
+
   def login
     user = User.find_by(email: params[:email])
     if user.nil?
@@ -40,6 +41,7 @@ class UsersController < ApplicationController
       redirect_to login_path
     elsif user.authenticate(params[:password])
       session[:user_id] = user.id
+      cookies[:authorized] = {value: 1, expires: 1.hour}
       flash[:success] = "Welcome, #{user.email}!"
       redirect_to "/users/#{user.id}"
     else
