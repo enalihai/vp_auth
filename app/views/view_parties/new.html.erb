@@ -5,10 +5,7 @@
     <%= button_to "Discover Page", "/users/#{params[:user_id]}/discover", method: :get %>
   </div> <br>
   <div id="box2">
-    <h2>Viewing Party Details</h2>
-    <% flash.each do |type, msg| %>
-      <div> <%= msg %> </div>
-    <% end %>
+    <h2>Viewing Party Details</h2><br>
     <div class="form">
       <%= form_with url: "/users/#{params[:user_id]}/movies/#{params[:movie_id]}/view_parties", method: :post, local: true do |f| %>
         <p>

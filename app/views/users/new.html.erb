@@ -1,15 +1,13 @@
-<h1> Viewing Party Lite </h1>
-
-<h2> Register a New User </h2>
+<h1> Register New User </h1>
 
 <%= form_with model: @user, method: :post do |f| %>
-  <p><%= f.label :name, "Name:  " %>
-  <%= f.text_field :name %><br></p>
-  <p><%= f.label :email, "Email:  " %>
-  <%= f.text_field :email %><br></p>
-  <p><%= f.label :password, "Password:  " %>
-  <%= f.password_field :password %><br></p>
-  <p><%= f.label :password_confirmation, "Password Confirmation:  " %>
-  <%= f.password_field :password_confirmation %><br></p>
-  <p><%= f.submit "Register User" %></p>
+    <p><%= f.label :name, "Name:" %>
+    <%= f.text_field :name %><br></p>
+    <p><%= f.label :email, "Email:  " %>
+    <%= f.text_field :email %><br></p>
+    <p><%= f.label :password, "Password:  " %>
+    <%= f.password_field :password %><br></p>
+    <p><%= f.label :password_confirmation, "Password Confirmation:  " %>
+    <%= f.password_field :password_confirmation %><br></p>
+    <p><%= f.submit "Register User" %></p>
 <% end %>
