@@ -1,0 +1,8 @@
+
+<% if Current.user %>
+  <h1>Viewing Party Private Dashboard</h1><br>
+  <h3>Logged in as: <%= Current.user.email %></h3><br>
+  <%= link_to "Log Out", logout_path, method: :delete %>
+<% else %>
+      There is no Current User. Log in or register!
+<% end %>

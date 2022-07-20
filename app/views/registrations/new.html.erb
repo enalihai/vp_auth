@@ -1,0 +1,19 @@
+<h1> Viewing Party Lite </h1><br>    
+<% if Current.user %>
+  <% redirect_to dashboard_path %>
+<% else %>
+    
+    <h2> Register New User </h2><br>
+    
+    <%= form_with url: register_path, method: :post, local: true do |form| %>
+        <p><%= form.label :name, "Name:" %>
+        <%= form.text_field :name %><br></p>
+        <p><%= form.label :email, "Email:  " %>
+        <%= form.text_field :email %><br></p>
+        <p><%= form.label :password, "Password:  " %>
+        <%= form.password_field :password %><br></p>
+        <p><%= form.label :password_confirmation, "Password Confirmation:  " %>
+        <%= form.password_field :password_confirmation %><br></p>
+        <p><%= form.submit "Register User" %></p>
+    <% end %>
+<% end %>

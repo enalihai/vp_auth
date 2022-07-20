@@ -1,9 +1,15 @@
-<h1>Log In as a User</h1><br>
-
-<%= form_with url: login_path do |form| %>
-  <%= form.label :email, 'Email:' %>
-  <%= form.text_field :email %>
-  <%= form.label :password, 'Password:' %>
-  <%= form.password_field :password %>
-  <%= form.submit 'Log In' %>
+<h1>Viewing Party Lite</h1><br>
+<% if Current.user %>
+  <%= "#{Current.user.email} is already logged in. Log out to change Users" %>
+  <%= link_to "Log Out", logout_path, method: :delete %>
+<% else %>
+  <h2>Log In as a User</h2><br>
+    
+    <%= form_with url: login_path, method: :post, local: true do |form| %>
+      <%= form.label :email, 'Email:' %>
+      <%= form.text_field :email %>
+      <%= form.label :password, 'Password:' %>
+      <%= form.password_field :password %>
+      <%= form.submit 'Log In' %>
+    <% end %>
 <% end %>

@@ -23,7 +23,7 @@ RSpec.describe 'User Index Page', type: :feature do
       fill_in :password, with: "password"
       click_button "Log In"
 
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("#{oakley.email} logged in!")
     end
 
