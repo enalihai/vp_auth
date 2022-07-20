@@ -24,7 +24,7 @@ RSpec.describe 'User Index Page', type: :feature do
       click_button "Log In"
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content("Welcome to your dashboard, #{oakley.name}!")
+      expect(page).to have_content("#{oakley.email} logged in!")
     end
 
     it "cannot log in with bad credentials" do
