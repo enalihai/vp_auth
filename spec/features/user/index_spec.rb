@@ -23,8 +23,8 @@ RSpec.describe 'User Index Page', type: :feature do
       fill_in :password, with: "password"
       click_button "Log In"
 
-      expect(current_path).to eq("/users/#{oakley.id}")
-      expect(page).to have_content("#{oakley.name}'s Dashboard")
+      expect(current_path).to eq(root_path)
+      expect(page).to have_content("Welcome to your dashboard, #{oakley.name}!")
     end
 
     it "cannot log in with bad credentials" do
